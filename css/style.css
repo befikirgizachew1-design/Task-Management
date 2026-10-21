@@ -288,6 +288,54 @@ input[type="date"] {
 .task-meta {
   overflow-wrap: anywhere;
 }
+ 
+ 
+/* Arrange task form fields in two columns */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 20px;
+}
+
+/* Keep each label directly above its input */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* Make the task title span both columns */
+.title-field {
+  grid-column: 1 / -1;
+}
+
+/* Override the general label spacing */
+.form-field label {
+  margin: 0 0 6px;
+}
+
+/* Keep fields the same width */
+.form-field input,
+.form-field select {
+  width: 100%;
+  min-width: 0;
+}
+
+/* Keep the submit buttons below both columns */
+.form-actions {
+  margin-top: 20px;
+}
+
+/* On small screens, use one column */
+@media (max-width: 500px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .title-field {
+    grid-column: auto;
+  }
+}
 
 
 @media (max-width: 650px) {

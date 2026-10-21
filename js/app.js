@@ -216,7 +216,7 @@ taskForm.addEventListener("submit", (event) => {
   const title = titleInput.value;
   const category = categoryInput.value;
   const priority = priorityInput.value;
-  const dueDate = dateInput.value;
+  const dueDate = dateInput.value.trim();
 
   const result = validateTask(title, priority, category, dueDate);
 
@@ -232,7 +232,15 @@ taskForm.addEventListener("submit", (event) => {
       tasks = addTask(tasks, title, priority, category, dueDate);
     }
 
-    persistTasks();
+    console.log("Tasks after adding:", tasks);
+
+    const saved = persistTasks();
+    console.log("Tasks saved successfully:", saved);
+
+    if (!saved) {
+      return;
+    }
+
     resetForm();
     renderApp();
   } catch (error) {
