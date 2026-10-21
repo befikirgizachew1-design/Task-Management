@@ -1,14 +1,47 @@
-
+/* Light Mode: default theme */
 :root {
-  --primary: #5145cd;
-  --primary-dark: #3d33a5;
-  --background: #f5f6fb;
-  --surface: #ffffff;
-  --text: #25253a;
-  --muted: #77788c;
-  --border: #e4e5ef;
-  --danger: #c9364f;
-  --success: #17845d;
+  color-scheme: light;
+
+  --bg-color: #f5f7fb;
+  --text-color: #172033;
+  --card-bg: #ffffff;
+  --border-color: #dce2ea;
+  --input-bg: #ffffff;
+  --button-bg: #2563eb;
+  --button-text: #ffffff;
+  --muted-text: #64748b;
+  /* Connect the existing CSS to the theme colors */
+  --background: var(--bg-color);
+  --text: var(--text-color);
+  --surface: var(--card-bg);
+  --border: var(--border-color);
+  --muted: var(--muted-text);
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --danger: #b91c1c;
+}
+
+/* Dark Mode */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg-color: #111827;
+  --text-color: #f9fafb;
+  --card-bg: #1f2937;
+  --border-color: #374151;
+  --input-bg: #1f2937;
+  --button-bg: #3b82f6;
+  --button-text: #ffffff;
+  --muted-text: #9ca3af;
+  /* Dark theme versions of the existing variables */
+  --background: var(--bg-color);
+  --text: var(--text-color);
+  --surface: var(--card-bg);
+  --border: var(--border-color);
+  --muted: var(--muted-text);
+  --primary: #60a5fa;
+  --primary-dark: #3b82f6;
+  --danger: #f87171;
 }
 
 * {
@@ -17,10 +50,13 @@
 
 body {
   margin: 0;
-  background: var(--background);
-  color: var(--text);
+  background: var(--bg-color);
+  color: var(--text-color);
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.6;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
 }
 
 .container {
@@ -101,8 +137,8 @@ select {
   padding: 12px;
   border: 1px solid var(--border);
   border-radius: 8px;
-  background: white;
-  color: var(--text);
+  background: var(--input-bg);
+  color: var(--text-color);
   font: inherit;
 }
 
@@ -253,8 +289,6 @@ footer {
   font-size: 0.85rem;
 }
 
-
-
 /* Category and priority labels */
 .task-labels {
   display: flex;
@@ -288,8 +322,7 @@ input[type="date"] {
 .task-meta {
   overflow-wrap: anywhere;
 }
- 
- 
+
 /* Arrange task form fields in two columns */
 .form-grid {
   display: grid;
@@ -337,7 +370,6 @@ input[type="date"] {
   }
 }
 
-
 @media (max-width: 650px) {
   .statistics {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -356,4 +388,20 @@ input[type="date"] {
     width: 100%;
     padding-left: 30px;
   }
+}
+/* Theme toggle button */
+#theme-toggle {
+  margin: 12px 0;
+  padding: 10px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#theme-toggle:hover {
+  opacity: 0.85;
 }

@@ -349,3 +349,33 @@ taskList.addEventListener("change", (event) => {
 
 // Show saved tasks when the page opens
 renderApp();
+
+const themeToggle = document.querySelector("#theme-toggle");
+const savedTheme = localStorage.getItem("task-manager-theme");
+
+// Restore the saved theme, or use light mode
+let currentTheme = savedTheme === "dark" ? "dark" : "light";
+
+function applyTheme() {
+  document.documentElement.dataset.theme = currentTheme;
+
+  if (currentTheme === "dark") {
+    themeToggle.textContent = "☀️ Light Mode";
+    themeToggle.setAttribute("aria-label", "Switch to light mode");
+  } else {
+    themeToggle.textContent = "🌙 Dark Mode";
+    themeToggle.setAttribute("aria-label", "Switch to dark mode");
+  }
+}
+
+// Change the theme when the button is clicked
+themeToggle.addEventListener("click", () => {
+  currentTheme = currentTheme === "light" ? "dark" : "light";
+
+  localStorage.setItem("task-manager-theme", currentTheme);
+
+  applyTheme();
+});
+
+// Apply the theme when the page loads
+applyTheme();
