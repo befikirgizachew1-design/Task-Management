@@ -139,11 +139,40 @@ function createTaskElement(task) {
     `${priorityName[task.priority] || "Unknown"} Priority`,
   );
 
-  const dueDate = createTextElement(
-    "div",
-    "task-meta",
-    task.dueDate ? `Due: ${task.dueDate}` : "No due date",
-  );
+  
+let deadlineLabel = "No due date";
+let deadlineClass = "deadline-none";
+
+if (task.completed) {
+  deadlineLabel = "Completed";
+  deadlineClass = "deadline-completed";
+} else if (task.dueDate) {
+  const [month, day, year] = task.dueDate.split("/").map(Number);
+
+  const deadline = new Date(year, month - 1, day);
+  deadline.setHours(0, 0, 0, 0);
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  if (deadline < today) {
+    deadlineLabel = "Overdue";
+    deadlineClass = "deadline-overdue";
+  } else if (deadline.getTime() === today.getTime()) {
+    deadlineLabel = "Due Today";
+    deadlineClass = "deadline-today";
+  } else {
+    deadlineLabel = "Upcoming";
+    deadlineClass = "deadline-upcoming";
+  }
+}
+
+const dueDate = createTextElement(
+  "div",
+  `task-meta deadline ${deadlineClass}`,
+  task.dueDate ? `Due: ${task.dueDate} — ${deadlineLabel}` : deadlineLabel,
+);
+
 
   const createdDate = new Date(task.createdAt);
   const createdText = Number.isNaN(createdDate.getTime())

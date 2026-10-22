@@ -405,3 +405,28 @@ input[type="date"] {
 #theme-toggle:hover {
   opacity: 0.85;
 }
+
+
+.deadline {
+  font-weight: 600;
+}
+
+.deadline-overdue {
+  color: #dc2626;
+}
+
+.deadline-today {
+  color: #d97706;
+}
+
+.deadline-upcoming {
+  color: #16a34a;
+}
+
+.deadline-completed {
+  color: var(--muted);
+}
+
+.deadline-none {
+  color: var(--muted);
+}
